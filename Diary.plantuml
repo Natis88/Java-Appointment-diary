@@ -1,0 +1,110 @@
+@startuml Diary
+
+class Meeting {
+- DateTime start
+- DateTime end
+- String subject
+- boolean isRecurring
+- int numberCopies
+-Frequency frequency
++ isOverlapping(Meeting) : boolean
++ compareTo(Meeting) : int
++getNearestHourQuarter()
++checkWorkHours()
++validWorkHours()
+}
+
+class Diary {
+
++ load(String)
++ save(String)
++findMeeting()
+}
+
+
+class SortedDynamicArray {
+- Meeting[] array
+- int capacity
++ add(Meeting)
++ remove(Meeting)
++ find() : Meeting
++ find() : Meeting[]
++findPositionAndInsert()
++addMeetingByFrequency()
+}
+
+class DailySchedule {
+    +createDaily()
+    +printcreateDaily()
+
+}
+
+class WeeklySchedule {
+    +createWeekley()
+    +printWeekley()
+
+}
+
+
+
+
+
+
+enum Frequency{
+    Daily
+    Weekley 
+    Monthly 
+    Annually 
+    None
+}
+
+
+
+class AppoitmentDiary{
+    +setMeeting()
+    +removeMeeting()
+}
+class MeetingValidator{
+ +isOverlapping()
+ +checkWorkHours()
+ +getNearestHourQuarter()
+ +returnValidated()
+
+}
+enum Days{
+     SUNDAY
+     MONDAY
+      TUESDAY
+       WEDNESDAY 
+       THURSDAY
+        FRIDAY
+         SATURDAY
+         +getDay()
+         +next()
+}
+
+
+
+AppoitmentDiary *-- Diary
+AppoitmentDiary *-- WeeklySchedule
+AppoitmentDiary *-- DailySchedule
+AppoitmentDiary *-- Frequency
+AppoitmentDiary*--MeetingValidator
+AppoitmentDiary*--Meeting
+WeeklySchedule --o Diary
+Days --o WeeklySchedule
+Frequency --o Meeting
+ Frequency--o SortedDynamicArray
+
+MeetingValidator --o Meeting
+
+
+
+
+
+
+
+SortedDynamicArray "1" *-- "0..*" Meeting
+
+
+@enduml
